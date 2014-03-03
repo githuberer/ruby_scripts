@@ -2,16 +2,6 @@
 require 'mysql2'
 # crontab: 00:10 (every day)
 # 20 0 * * *  scriptpath
-#
-# This script is used for split table for database monthly.
-# Run this script every day in crontab.
-#
-# Example explaination:
-# Records weekago from table: <requestlog> (requestlog from array $table_names_rearr_weekago) in database: <test> will be moved to table: <requestlog_201402>(201402 from string $date) daily.
-#
-# Modify variable as you need.
-# $table_names_rearr_weekago: table name here will only exist records created last week.
-# $table_names_rearr_monthago: table name here will only exist records created last month.
 
 
 $client = Mysql2::Client.new(
@@ -22,49 +12,52 @@ $client = Mysql2::Client.new(
   :database => 'test'
 )
 
-$table_names_rearr_weekago = %w{ requestlog }
-$table_names_rearr_monthago = %w{ integrate linklog }
+$table_names = [ "test1", "test2", "test3" ]
 $date = Time.now.strftime('%Y%m')
 
 
-
-def rearrenge_table(table_name, unit)   # unit: day, week, month
+def rearrenge_table(table_name, num)   # num: how many days
   ### get ids from table_name
   ids = []
   $client.query("
                 SELECT id FROM #{table_name}
-                WHERE createDate < curdate()-interval 1 #{unit}
+                WHERE createDate < curdate()-interval #{num} day
                 ").each { |e| ids << e }
-  ids.flatten!
+    ids.flatten!
 
-  puts table_name + "================="
-  puts ids.inspect
+    puts <<-header
+    ==============================
+    #{Time.now}
+    ==============================
+    id:            #{ids.inspect}
+    table_name:    #{table_name}
+    records size:  #{ids.size}
+    header
 
-  unless ids.empty?
+  until ids.empty?
+    ids_new = ids.shift(1000).join(", ")
+
     ### insert records to table_name_date
+    puts "insert =================="
     table_name_date = table_name + "_" + $date
     $client.query(" CREATE TABLE IF NOT EXISTS #{table_name_date} LIKE #{table_name} ")
     $client.query("
                   INSERT INTO #{table_name_date}
                   SELECT * FROM #{table_name}
-                  WHERE id IN ( #{ids.join(', ')} ) 
+                  WHERE id IN ( #{ids_new} )
                   ")
 
     ### delete records from table_name
+    puts "delete =================="
     $client.query("
                 DELETE FROM #{table_name}
-                WHERE id IN ( #{ids.join(', ')} )
+                WHERE id IN( #{ids_new} )
                   ")
-
   end
-
-=begin
-=end
 end
 
 
-$table_names_rearr_monthago.each { |e| rearrenge_table(e, 'month') }
-$table_names_rearr_weekago.each { |e| rearrenge_table(e, 'week') }
+$table_names.each { |e| rearrenge_table(e, '30') }
 
 
 
