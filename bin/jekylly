@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+if ARGV.empty?
+  puts <<-EOF
+  \n Usage Example :    #{$0} title \n
+  EOF
+  exit
+end
+
+title = ARGV.shift
+time = Time.new
+
+content = <<-EOF
+---
+layout: post
+title: #{title}
+date: #{time.strftime "%Y-%m-%d %H:%M:%S"}
+categories:
+---
+\n\n\n
+EOF
+
+File.open("#{time.strftime '%Y-%m-%d'}-#{title}.markdown", 'w') { |f| f.write(content) }
+
+
+
