@@ -21,12 +21,12 @@ require 'headless'
 #     
 #
 # 使用方法:          
-#     运行脚本时跟上参数cnblog_name, 如下:
-#     ./export_cnlogs_to_jekyll.rb cnblog_name
+#     运行脚本时跟上参数username, 如下:
+#     ./export_cnlogs_to_jekyll.rb username
 #
 #
-# cnblog_name:       
-#     例如url是http://cnblogs.com/yywang, 则cnblog_name就是yywang. 那么使用方法就是./export_cnblogs_to_jekyll.rb yywang
+# username:       
+#     例如url是http://cnblogs.com/yywang, 则username就是yywang. 那么使用方法就是./export_cnblogs_to_jekyll.rb yywang
 #
 #
 # 脚本运行环境:
@@ -37,7 +37,7 @@ require 'headless'
 #
 #
 # 脚本处理过程解释:  
-#     该脚本会打开http://cnblogs.com/cnblog_name地址然后根据"随笔档案"获取相关用户的每篇文章地址, 然后获取文章内容部分和相关分类信息. 
+#     该脚本会打开http://cnblogs.com/username地址然后根据"随笔档案"获取相关用户的每篇文章地址, 然后获取文章内容部分和相关分类信息. 
 #
 #
 # 输出结果解释:          
