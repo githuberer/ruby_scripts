@@ -18,24 +18,23 @@ require 'stringex'
 #     
 #
 # 注意:
-#     1, 如果文章设置了访问密码, 导出时请暂时取消密码.
-#     2, 如果分类名字为中文的, 请尽量在转换前将分类名字更换为英文, 并且等待10分钟左右等待页面生效.
-#     3, 分类名字为中文的, 将在转换后额外附加提供一个"汉语拼音"的分类名字.
+#     1, 如果文章设置了访问密码, 导出时请暂时取消密码, 否则无法导入相关随笔.
+#     2, 转换后的随笔分类名字统一为小写字母.
+#     3, 如果分类名字为中文的, 请尽量在转换前将分类名字更换为英文, 并且等待10分钟左右等待页面生效.否则, 转换后的分类标签将额外附加提供一个"汉语拼音"的分类名字.
 #     
 #
 # 使用方法:          
-#     运行脚本时跟上参数username, 如下:
-#     ./export_cnlogs_to_jekyll.rb username
+#     1, 运行脚本时跟上参数username, 如下:
+#       ./export_cnlogs_to_jekyll.rb username
+#     2, username应该是什么:
+#       例如url是http://cnblogs.com/yywang, 则username就是yywang. 那么使用方法就是./export_cnblogs_to_jekyll.rb yywang
 #
-#
-# username:       
-#     例如url是http://cnblogs.com/yywang, 则username就是yywang. 那么使用方法就是./export_cnblogs_to_jekyll.rb yywang
 #
 #
 # 脚本运行环境:
-#     如果脚本的运行系统环境是Ubuntu系统, 安装依赖, 请执行如下命令:
+#     1, 如果脚本的运行系统环境是Ubuntu系统, 安装依赖, 请执行如下命令:
 #         aptitude install xvfb firefox
-#     对于ruby库环境, 安装依赖, 请执行如下命令:
+#     2, 对于ruby库环境, 安装依赖, 请执行如下命令:
 #         gem install nokogiri watir-webdriver headless stringex
 #
 #
@@ -83,7 +82,7 @@ def get_article(url)
   content = html.css('div#cnblogs_post_body').to_s.each_line.to_a[1...-1].join("\n").gsub(/\r\n/, "\n")
   category = []; 
   html.css('div#BlogPostCategory a').each do |e| 
-    category << e.text 
+    category << e.text.downcase
     category << e.text.to_url if e.text =~ /\p{Han}+/
   end
   dirname = "_posts/cnblog"
