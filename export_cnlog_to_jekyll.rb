@@ -36,7 +36,7 @@ require 'stringex'
 #     如果脚本的运行系统环境是Ubuntu系统, 安装依赖, 请执行如下命令:
 #         aptitude install xvfb firefox
 #     对于ruby库环境, 安装依赖, 请执行如下命令:
-#         gem install nokogiri watir-webdriver headless 
+#         gem install nokogiri watir-webdriver headless stringex
 #
 #
 # 脚本处理过程解释:  
