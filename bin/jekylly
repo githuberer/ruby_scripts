@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require 'stringex'
 
 if ARGV.empty?
   puts <<-EOF
@@ -10,12 +11,40 @@ end
 title = ARGV.shift
 time = Time.new
 
+
+categories = %w[
+  ruby
+  sql
+  linuxshell
+  linuxsystem
+  readingnotes
+  others
+  笔下新语乱弹牛
+  彷徨原来是来自于未来的呐喊
+]
+
+
+puts "\n\nPlease type in category numbers:\n"
+ (0...categories.length).each do |e|
+  puts "#{e}, #{categories[e]}"
+end
+puts "\nExample: 0 1 3\n\n"
+
+nums = gets().split("\s")
+
+categories_new = []
+nums.each do |e| 
+  en = e.to_i
+  categories_new << categories[en]
+  categories_new << categories[en].to_url if categories[en] =~ /\p{Han}+/
+end
+
 content = <<-EOF
 ---
 layout: post
 title: #{title}
 date: #{time.strftime "%Y-%m-%d %H:%M:%S"}
-categories:
+categories: [ #{categories_new.join(', ')} ]
 ---
 \n\n\n
 EOF

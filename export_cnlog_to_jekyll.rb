@@ -43,7 +43,7 @@ require 'stringex'
 #
 #
 # 输出结果解释:          
-#     该脚本运行完毕之后, 会在运行目录下面生成"_posts/cnblog"目录, 脚本抓取到的文章, 将以jekyll的post标准方式保存即: 文件名date-title.markdown, 内容为yaml格式.
+#     该脚本运行完毕之后, 会在运行目录下面生成"_posts/cnblogs"目录, 脚本抓取到的文章, 将以jekyll的post标准方式保存即: 文件名date-title.markdown, 内容为yaml格式.
 #
 #
 #####################################################################
@@ -85,7 +85,7 @@ def get_article(url)
     category << e.text.downcase
     category << e.text.to_url if e.text =~ /\p{Han}+/
   end
-  dirname = "_posts/cnblog"
+  dirname = "_posts/cnblogs"
   filename = date.match(/....-..-../).to_s + "-" + title.scan(/[a-zA-Z0-9\p{Han}]+/).join("-") + ".markdown"
   content = <<-EOF.gsub(/^\s+/, "")
   ---
