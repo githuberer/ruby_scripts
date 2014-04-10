@@ -3,6 +3,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'watir-webdriver'
 require 'headless'
+require 'stringex'
 #$VERBOSE = true
 
 
@@ -10,14 +11,16 @@ require 'headless'
 # 说明部分 #
 #
 # 该脚本的作用:
-#     该脚本适用于想要把个人博客中cnblog迁移到jekyll的用户. 
-#     需要注意的是, cnblog网站的管理内容提供迁移博客的方法, 但是导出的文章内容是xml格式而且不带有文章分类标签. 
-#     该脚本可以抓取cnblog的博客文章然后转化成jekyll的post标准格式.
-#     该脚本的运行环境在下面"运行脚本的环境"里面有详细说明.
+#     1, 该脚本适用于想要把个人博客中cnblog迁移到jekyll的用户. 
+#     2, 需要注意的是, cnblog网站的管理内容提供迁移博客的方法, 但是导出的文章内容是xml格式而且不带有文章分类标签. 
+#     3, 该脚本可以抓取cnblog的博客文章然后转化成jekyll的post标准格式.
+#     4, 该脚本的运行环境在下面"运行脚本的环境"里面有详细说明.
 #     
 #
 # 注意:
-#     如果文章设置了访问密码, 导出时请暂时取消密码.
+#     1, 如果文章设置了访问密码, 导出时请暂时取消密码.
+#     2, 如果分类名字为中文的, 请尽量在转换前将分类名字更换为英文, 并且等待10分钟左右等待页面生效.
+#     3, 分类名字为中文的, 将在转换后额外附加提供一个"汉语拼音"的分类名字.
 #     
 #
 # 使用方法:          
@@ -78,7 +81,11 @@ def get_article(url)
   title = html.css('a#cb_post_title_url').text.gsub("\"","")
   date = html.css('span#post-date').text
   content = html.css('div#cnblogs_post_body').to_s.each_line.to_a[1...-1].join("\n").gsub(/\r\n/, "\n")
-  category = []; html.css('div#BlogPostCategory a').each { |e| category << e.text }
+  category = []; 
+  html.css('div#BlogPostCategory a').each do |e| 
+    category << e.text 
+    category << e.text.to_url if e.text =~ /\p{Han}+/
+  end
   dirname = "_posts/cnblog"
   filename = date.match(/....-..-../).to_s + "-" + title.scan(/[a-zA-Z0-9\p{Han}]+/).join("-") + ".markdown"
   content = <<-EOF.gsub(/^\s+/, "")
