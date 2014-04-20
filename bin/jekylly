@@ -49,7 +49,7 @@ categories: [ #{categories_new.join(', ')} ]
 \n\n\n
 EOF
 
-File.open("#{time.strftime '%Y-%m-%d'}-#{title}.markdown", 'w') { |f| f.write(content) }
+File.open("#{time.strftime '%Y-%m-%d'}-#{title.scan(/[a-zA-Z0-9\p{Han}]+/).join("-")}.markdown", 'w') { |f| f.write(content) }
 
 
 
