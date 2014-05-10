@@ -91,7 +91,7 @@ def get_article(url)
   ---
   layout: post
   title: "#{title}"
-  date: "#{date}"
+  date: "#{date} +0800"
   comments: true
   categories: [ #{category.join(", ")} ]
   ---

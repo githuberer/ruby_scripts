@@ -43,7 +43,7 @@ content = <<-EOF
 ---
 layout: post
 title: #{title}
-date: #{time.strftime "%Y-%m-%d %H:%M:%S"}
+date: #{time.strftime "%Y-%m-%d %H:%M:%S"} +0800
 categories: [ #{categories_new.join(', ')} ]
 ---
 \n\n\n
