@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'stringex'
+#require 'stringex'
 
 if ARGV.empty?
   puts <<-EOF
@@ -36,7 +36,7 @@ categories_new = []
 nums.each do |e| 
   en = e.to_i
   categories_new << categories[en]
-  categories_new << categories[en].to_url if categories[en] =~ /\p{Han}+/
+  #categories_new << categories[en].to_url if categories[en] =~ /\p{Han}+/
 end
 
 content = <<-EOF
