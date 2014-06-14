@@ -5,9 +5,52 @@ require 'watir-webdriver'
 require 'headless'
 require 'stringex'
 #$VERBOSE = true
-
-
-#####################################################################
+#
+#
+#
+#
+# ####################################################################
+#
+#
+# This script is used to export blog from cnblog(cnblog.com) to Jekyll.
+#
+# Find and view it at link here:
+# https://github.com/wyying/ruby_scripts/blob/master/export_cnlog_to_jekyll.rb
+#
+# Download and update it at link here:
+# https://raw.githubusercontent.com/wyying/ruby_scripts/master/export_cnlog_to_jekyll.rb
+#
+#
+# ####################################################################
+#
+#
+# The MIT License (MIT)
+#
+# Copyright (c) 2014 WangYanying
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of
+# this software and associated documentation files (the "Software"), to deal in
+# the Software without restriction, including without limitation the rights to
+# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+# the Software, and to permit persons to whom the Software is furnished to do so,
+# subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+# FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+# COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+# IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+#
+# ####################################################################
+#
+#
+#
+#
 # 说明部分 #
 #
 # 该脚本的作用:
@@ -17,17 +60,25 @@ require 'stringex'
 #     4, 该脚本的运行环境在下面"运行脚本的环境"里面有详细说明.
 #     
 #
+#
+#
 # 注意:
 #     1, 如果文章设置了访问密码, 导出时请暂时取消密码, 否则无法导入相关随笔.
 #     2, 转换后的随笔分类名字统一为小写字母.
 #     3, 如果分类名字为中文的, 请尽量在转换前将分类名字更换为英文, 并且等待10分钟左右等待页面生效.否则, 转换后的分类标签将额外附加提供一个"汉语拼音"的分类名字.
 #     
 #
+#
+#
+#
+#
 # 使用方法:          
 #     1, 运行脚本时跟上参数username, 如下:
 #       ./export_cnlogs_to_jekyll.rb username
 #     2, username应该是什么:
 #       例如url是http://cnblogs.com/yywang, 则username就是yywang. 那么使用方法就是./export_cnblogs_to_jekyll.rb yywang
+#
+#
 #
 #
 #
@@ -38,15 +89,23 @@ require 'stringex'
 #         gem install nokogiri watir-webdriver headless stringex
 #
 #
+#
+#
 # 脚本处理过程解释:  
 #     该脚本会打开http://cnblogs.com/username地址然后根据"随笔档案"获取相关用户的每篇文章地址, 然后获取文章内容部分和相关分类信息. 
+#
 #
 #
 # 输出结果解释:          
 #     该脚本运行完毕之后, 会在运行目录下面生成"_posts/cnblogs"目录, 脚本抓取到的文章, 将以jekyll的post标准方式保存即: 文件名date-title.markdown, 内容为yaml格式.
 #
 #
-#####################################################################
+# ####################################################################
+#
+#
+#
+#
+#
 
 
 def get_archive_links(username)
