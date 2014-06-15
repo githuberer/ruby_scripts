@@ -13,14 +13,14 @@ time = Time.new
 
 
 categories = %w[
+  sciencefiction
+  mypoints
+  myjournals
   ruby
   sql
   linuxshell
   linuxsystem
-  readingnotes
   others
-  笔下新语乱弹牛
-  彷徨原来是来自于未来的呐喊
 ]
 
 
