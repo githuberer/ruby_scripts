@@ -48,8 +48,9 @@ categories: [ #{categories_new.join(', ')} ]
 ---
 \n\n\n
 EOF
+postfile = "#{time.strftime '%Y-%m-%d'}-#{title.scan(/[a-zA-Z0-9\p{Han}]+/).join("-")}.markdown"
 
-File.open("#{time.strftime '%Y-%m-%d'}-#{title.scan(/[a-zA-Z0-9\p{Han}]+/).join("-")}.markdown", 'w') { |f| f.write(content) }
+File.open(postfile, 'w') { |f| f.write(content) }
 
 
 
