@@ -26,7 +26,20 @@ rpost = `ls -t #{iohome}/_posts/ |head -1`
 
 case option
 when params[0] then exec "cd #{iohome} && jekyll serve --watch"
-when params[1] then exec "cd #{iohome} && func_gitall"
+when params[1] then exec <<-EOF
+  cd #{iohome} && (
+      echo  "\n\n==============\ngit pull\n=============="
+      git pull
+      echo  "\n\n==============\ngit add -A . \n=============="
+      git add -A .
+      echo  "\n\n===============\ngit commit -a -m 'nil'\n================"
+      git commit -m "nil"
+      echo  "\n\n==============\ngit push\n=============="
+      git push
+      echo  "\n\n==============\ngit status\n=============="
+      git status
+  )
+  EOF
 when params[2] then exec "vim #{iohome}/_posts/#{rpost}"
 when params[3] then exec "emacs #{iohome}/_posts/#{rpost} &> /dev/null &"
 when params[4] then
