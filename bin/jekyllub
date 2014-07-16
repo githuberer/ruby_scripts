@@ -62,12 +62,12 @@ when params[4] then
   categories_post = categories.values_at(*nums)
 
   content = <<-EOF
-  ---
-  layout: post
-  title: #{title}
-  date: #{time.strftime "%Y-%m-%d %H:%M:%S"} +0800
-  categories: [ #{categories_post.join(', ')} ]
-  ---
+---
+layout: post
+title: #{title}
+date: #{time.strftime "%Y-%m-%d %H:%M:%S"} +0800
+categories: [ #{categories_post.join(', ')} ]
+---
   \n\n\n
   EOF
 
