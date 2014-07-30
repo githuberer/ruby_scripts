@@ -65,7 +65,7 @@ when params[4] then
 ---
 layout: post
 title: #{title}
-date: #{time.strftime "%Y-%m-%d %H:%M:%S"} +0800
+date: #{time.strftime "%Y-%m-%d %H:%M:%S"}
 categories: [ #{categories_post.join(', ')} ]
 ---
   \n\n\n
