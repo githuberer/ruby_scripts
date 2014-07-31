@@ -47,7 +47,7 @@ when params[4] then
   categories = %w{
       sciencefiction
       mypoints
-      myjournals
+      mydiary
       ruby
       sql
       linuxshell
