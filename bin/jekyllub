@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-iohome="#{ENV['HOME']}/wyying.github.io"
+iohome="#{ENV['HOME']}/yanyingwang.github.io"
 params = [ "serve", "gal", "vim", "emacs", "new" ]
 
 unless Dir.exist?(iohome)
@@ -45,13 +45,12 @@ when params[3] then exec "emacs #{iohome}/_posts/#{rpost} &> /dev/null &"
 when params[4] then
   time = Time.new
   categories = %w{
-      sciencefiction
-      mypoints
+      inspiration
+      mylife
       mydiary
-      ruby
-      sql
-      linuxshell
+      programming
       linuxsystem
+      linuxshell
       others
   }
 
